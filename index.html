@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Sabor del Chef - Restaurante Mediterráneo</title>
+    <style>
+        /* Estilos CSS completos para el sitio web */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --terracotta: #d2691e;
+            --olive: #556b2f;
+            --gold: #ffd700;
+            --cream: #fdf6e3;
+            --charcoal: #36454f;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--charcoal);
+            background-color: var(--cream);
+        }
+
+        .playfair {
+            font-family: 'Playfair Display', Georgia, serif;
+        }
+
+        /* Navegación */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(253, 246, 227, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--terracotta);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--charcoal);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--terracotta);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%23d2691e" width="1200" height="800"/><circle cx="300" cy="200" r="100" fill="%23ffd700" opacity="0.3"/><circle cx="900" cy="600" r="150" fill="%23556b2f" opacity="0.2"/></svg>');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--terracotta);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background: var(--olive);
+            transform: translateY(-2px);
+        }
+
+        /* Secciones */
+        .section {
+            padding: 5rem 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            color: var(--terracotta);
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--olive);
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Menu Section */
+        .menu-category {
+            margin-bottom: 3rem;
+        }
+
+        .menu-category h3 {
+            font-size: 2rem;
+            color: var(--olive);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .menu-item h4 {
+            color: var(--terracotta);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-item .price {
+            font-weight: bold;
+            color: var(--olive);
+            font-size: 1.2rem;
+            float: right;
+        }
+
+        .menu-item p {
+            color: #666;
+            margin-top: 0.5rem;
+        }
+
+        /* Gallery Section */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .gallery-item {
+            height: 200px;
+            background: var(--terracotta);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info h3 {
+            color: var(--terracotta);
+            margin-bottom: 1rem;
+        }
+
+        .contact-info p {
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--charcoal);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--charcoal);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* Chatbot */
+        .chatbot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .chatbot-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--terracotta);
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+        }
+
+        .chatbot-button:hover {
+            background: var(--olive);
+            transform: scale(1.1);
+        }
+
+        .chatbot-window {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 350px;
+            height: 500px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            display: none;
+            flex-direction: column;
+        }
+
+        .chatbot-window.active {
+            display: flex;
+        }
+
+        .chatbot-header {
+            background: var(--terracotta);
+            color: white;
+            padding: 1rem;
+            border-radius: 15px 15px 0 0;
+            text-align: center;
+        }
+
+        .chatbot-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+        }
+
+        .message {
+            margin-bottom: 1rem;
+            padding: 0.8rem;
+            border-radius: 10px;
+            max-width: 80%;
+        }
+
+        .message.bot {
+            background: #f0f0f0;
+            margin-right: auto;
+        }
+
+        .message.user {
+            background: var(--terracotta);
+            color: white;
+            margin-left: auto;
+        }
+
+        .chatbot-input {
+            display: flex;
+            padding: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .chatbot-input input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            margin-right: 0.5rem;
+        }
+
+        .chatbot-input button {
+            padding: 0.8rem 1rem;
+            background: var(--terracotta);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .about-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .chatbot-window {
+                width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navegación -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo playfair">El Sabor del Chef</div>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#menu">Menú</a></li>
+                <li><a href="#galeria">Galería</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <h1 class="playfair">El Sabor del Chef</h1>
+            <p>Auténtica cocina mediterránea fusión en el corazón de la ciudad</p>
+            <a href="#menu" class="btn">Descubre nuestro menú</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title playfair">Nuestra Historia</h2>
+            <div class="about-grid">
+                <div class="about-text">
+                    <h3 class="playfair">Bienvenidos a El Sabor del Chef</h3>
+                    <p>En El Sabor del Chef, fusionamos la tradición mediterránea con toques modernos para crear una experiencia gastronómica única. Nuestra chef ejecutiva Laura Gómez lidera un equipo apasionado por la excelencia culinaria.</p>
+                    <p>Ubicados en el corazón de la ciudad, nuestro restaurante ofrece un ambiente cálido y acogedor, perfecto para cualquier ocasión especial. Cada plato es preparado con ingredientes frescos y de la más alta calidad.</p>
+                </div>
+                <div class="about-image">
+                    <div style="width: 100%; height: 300px; background: var(--terracotta); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem;">
+                        Imagen del restaurante
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="section" style="background: white;">
+        <div class="container">
+            <h2 class="section-title playfair">Nuestro Menú</h2>
+            
+            <div class="menu-category">
+                <h3 class="playfair">Entrantes</h3>
+                <div class="menu-grid">
+                    <div class="menu-item">
+                        <h4>Ensalada Mediterránea</h4>
+                        <span class="price">12€</span>
+                        <p>Lechuga, tomate, pepino, aceitunas negras, queso feta, aderezo de limón</p>
+                    </div>
+                    <div class="menu-item">
+                        <h4>Croquetas de jamón ibérico</h4>
+                        <span class="price">14€</span>
+                        <p>Bechamel casera, jamón ibérico, pan rallado</p>
+                    </div>
+                    <div class="menu-item">
+                        <h4>Carpaccio de ternera</h4>
+                        <span class="price">16€</span>
+                        <p>Láminas finas de ternera, parmesano, rúcula, aceite de trufa</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-category">
+                <h3 class="playfair">Platos Principales</h3>
+                <div class="menu-grid">
+                    <div class="menu-item">
+                        <h4>Paella de mariscos ⭐</h4>
+                        <span class="price">24€</span>
+                        <p>Arroz bomba, mejillones, calamares, gambas, azafrán (ESPECIALIDAD DE LA CASA)</p>
+                    </div>
+                    <div class="menu-item">
+                        <h4>Entrecot a la parrilla</h4>
+                        <span class="price">26€</span>
+                        <p>Carne de vacuno, sal en escamas, patatas rústicas</p>
+                    </div>
+                    <div class="menu-item">
+                        <h4>Risotto de setas</h4>
+                        <span class="price">20€</span>
+                        <p>Arroz arborio, setas variadas, parmesano, nata, vino blanco</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-category">
+                <h3 class="playfair">Postres</h3>
+                <div class="menu-grid">
+                    <div class="menu-item">
+                        <h4>Tarta de queso al horno</h4>
+                        <span class="price">8€</span>
+                        <p>Base de galleta, queso crema, mermelada de frutos rojos</p>
+                    </div>
+                    <div class="menu-item">
+                        <h4>Coulant de chocolate</h4>
+                        <span class="price">9€</span>
+                        <p>Bizcocho de chocolate con interior fundente, helado de vainilla</p>
+                    </div>
+                    <div class="menu-item">
+                        <h4>Fruta fresca de temporada</h4>
+                        <span class="price">6€</span>
+                        <p>Selección de frutas de temporada</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: var(--cream); border-radius: 10px;">
+                <h3 class="playfair" style="color: var(--terracotta); margin-bottom: 1rem;">Menú del Día</h3>
+                <p style="font-size: 1.2rem; margin-bottom: 0.5rem;"><strong>14,90€</strong></p>
+                <p>Entrada + Plato principal + Postre + Bebida</p>
+                <p style="color: var(--olive);"><em>Disponible lunes a viernes al mediodía</em></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="galeria" class="section">
+        <div class="container">
+            <h2 class="section-title playfair">Galería</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">Paella de Mariscos</div>
+                <div class="gallery-item">Ambiente del Restaurante</div>
+                <div class="gallery-item">Carpaccio de Ternera</div>
+                <div class="gallery-item">Coulant de Chocolate</div>
+                <div class="gallery-item">Nuestra Cocina</div>
+                <div class="gallery-item">Terraza Exterior</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contacto" class="section" style="background: white;">
+        <div class="container">
+            <h2 class="section-title playfair">Contacto</h2>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Información de Contacto</h3>
+                    <p><strong>Dirección:</strong> Calle Gourmet 123, Ciudad Sabores, CP 45678</p>
+                    <p><strong>Teléfono:</strong> +34 912 345 678</p>
+                    <p><strong>Email:</strong> reservas@elsabordelchef.com</p>
+                    
+                    <h3 style="margin-top: 2rem;">Horarios</h3>
+                    <p><strong>Lunes - Viernes:</strong> 12:00-16:00 / 19:00-23:00</p>
+                    <p><strong>Sábados - Domingos:</strong> 13:00-17:00 / 20:00-00:00</p>
+                    
+                    <h3 style="margin-top: 2rem;">Nuestro Equipo</h3>
+                    <p><strong>Chef Ejecutiva:</strong> Laura Gómez</p>
+                    <p><strong>Encargado de sala:</strong> Diego Ramírez</p>
+                    <p><strong>Responsable de reservas:</strong> Ana Torres</p>
+                </div>
+                <div class="contact-form">
+                    <h3 style="color: var(--terracotta); margin-bottom: 1rem;">Envíanos un mensaje</h3>
+                    <form>
+                        <div class="form-group">
+                            <label>Nombre</label>
+                            <input type="text" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Teléfono</label>
+                            <input type="tel">
+                        </div>
+                        <div class="form-group">
+                            <label>Mensaje</label>
+                            <textarea rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Enviar mensaje</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 El Sabor del Chef. Todos los derechos reservados.</p>
+            <p>Restaurante mediterráneo fusión • Calle Gourmet 123 • Tel: +34 912 345 678</p>
+        </div>
+    </footer>
+
+    <!-- Chatbot -->
+    <div class="chatbot-container">
+        <button class="chatbot-button" onclick="toggleChatbot()">💬</button>
+        <div class="chatbot-window" id="chatbotWindow">
+            <div class="chatbot-header">
+                <h4>Asistente Virtual</h4>
+                <p>El Sabor del Chef</p>
+            </div>
+            <div class="chatbot-messages" id="chatbotMessages">
+                <div class="message bot">
+                    ¡Hola! Bienvenido a El Sabor del Chef. Soy tu asistente virtual. ¿En qué puedo ayudarte hoy?
+                </div>
+            </div>
+            <div class="chatbot-input">
+                <input type="text" id="chatbotInput" placeholder="Escribe tu mensaje..." onkeypress="handleEnter(event)">
+                <button onclick="sendMessage()">Enviar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript para funcionalidad del sitio web
+        
+        // Smooth scrolling para los enlaces de navegación
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Funcionalidad del chatbot
+        function toggleChatbot() {
+            const chatbotWindow = document.getElementById('chatbotWindow');
+            chatbotWindow.classList.toggle('active');
+        }
+
+        function handleEnter(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatbotInput');
+            const messages = document.getElementById('chatbotMessages');
+            const userMessage = input.value.trim();
+            
+            if (!userMessage) return;
+
+            // Agregar mensaje del usuario
+            const userDiv = document.createElement('div');
+            userDiv.className = 'message user';
+            userDiv.textContent = userMessage;
+            messages.appendChild(userDiv);
+
+            // Limpiar input
+            input.value = '';
+
+            // Simular respuesta del bot
+            setTimeout(() => {
+                const botDiv = document.createElement('div');
+                botDiv.className = 'message bot';
+                botDiv.textContent = getBotResponse(userMessage);
+                messages.appendChild(botDiv);
+                messages.scrollTop = messages.scrollHeight;
+            }, 1000);
+
+            messages.scrollTop = messages.scrollHeight;
+        }
+
+        function getBotResponse(message) {
+            const lowerMessage = message.toLowerCase();
+            
+            if (lowerMessage.includes('hola') || lowerMessage.includes('buenos') || lowerMessage.includes('buenas')) {
+                return '¡Hola! Bienvenido a El Sabor del Chef. Soy tu asistente virtual y estoy aquí para ayudarte con cualquier consulta sobre nuestro restaurante mediterráneo. ¿En qué puedo asistirte hoy?';
+            }
+            
+            if (lowerMessage.includes('menú') || lowerMessage.includes('menu') || lowerMessage.includes('comida') || lowerMessage.includes('platos')) {
+                return 'Nuestro menú mediterráneo fusión es delicioso. Te recomiendo especialmente nuestra Paella de Mariscos (24€), es nuestra especialidad. También tenemos entrantes como Carpaccio de Ternera (16€) y postres como nuestro famoso Coulant de Chocolate (9€). ¿Te interesa algún tipo de plato en particular?';
+            }
+            
+            if (lowerMessage.includes('reserva') || lowerMessage.includes('mesa') || lowerMessage.includes('disponibilidad')) {
+                return 'Por supuesto, estaré encantado de ayudarte con tu reserva. Puedes llamarnos al +34 912 345 678. Tenemos 20 mesas disponibles y podemos acomodar hasta 76 personas. ¿Para cuántas personas y qué día necesitas la reserva?';
+            }
+            
+            if (lowerMessage.includes('horario') || lowerMessage.includes('hora') || lowerMessage.includes('abierto')) {
+                return 'Nuestros horarios son: de lunes a viernes de 12:00-16:00 y 19:00-23:00, y sábados y domingos de 13:00-17:00 y 20:00-00:00. ¿Hay algún día específico en el que te gustaría visitarnos?';
+            }
+            
+            if (lowerMessage.includes('dónde') || lowerMessage.includes('ubicación') || lowerMessage.includes('dirección')) {
+                return 'Nos encontramos en Calle Gourmet 123, Ciudad Sabores, CP 45678. No tenemos parking propio, pero hay un parking público muy conveniente a solo 100 metros del restaurante. ¿Necesitas más indicaciones para llegar?';
+            }
+            
+            if (lowerMessage.includes('alergia') || lowerMessage.includes('celíaco') || lowerMessage.includes('vegetariano') || lowerMessage.includes('vegano')) {
+                return 'Por supuesto, manejamos todas las alergias alimentarias: gluten, lácteos, frutos secos, mariscos y huevo. También adaptamos platos para vegetarianos y veganos. Nuestro equipo de cocina está muy bien capacitado. ¿Hay alguna alergia específica que deba tener en cuenta?';
+            }
+            
+            if (lowerMessage.includes('recomend') || lowerMessage.includes('sugier') || lowerMessage.includes('qué me')) {
+                return 'Te recomiendo probar nuestra especialidad: la Paella de Mariscos (24€) con arroz bomba, mejillones, calamares, gambas y azafrán. Como entrante, el Carpaccio de Ternera (16€) es exquisito, y para terminar, no te puedes perder nuestro Coulant de Chocolate (9€). ¿Te apetece alguno de estos platos?';
+            }
+            
+            if (lowerMessage.includes('chef') || lowerMessage.includes('laura')) {
+                return 'Nuestro equipo está liderado por la Chef Ejecutiva Laura Gómez, una verdadera experta en cocina mediterránea. Diego Ramírez es nuestro Encargado de sala y Ana Torres maneja las reservas. ¡Es un equipo muy apasionado por ofrecer la mejor experiencia gastronómica!';
+            }
+            
+            return 'Gracias por tu consulta. En El Sabor del Chef nos especializamos en cocina mediterránea fusión. Puedo ayudarte con información sobre nuestro menú, reservas, horarios, alergias y servicios especiales. ¿Hay algo específico que te gustaría saber?';
+        }
+
+        // Formulario de contacto
+        document.querySelector('.contact-form form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('¡Gracias por tu mensaje! Te contactaremos pronto.');
+        });
+
+        // Efectos de scroll para la navegación
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(253, 246, 227, 0.98)';
+            } else {
+                navbar.style.background = 'rgba(253, 246, 227, 0.95)';
+            }
+        });
+    </script>
+</body>
+</html>
